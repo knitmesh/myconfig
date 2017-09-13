@@ -1,0 +1,70 @@
+[user]
+	name = lijinghui
+	email = lijinghui@t2cloud.net
+[core]
+	autocrlf = input
+
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    log = auto
+    ui = auto
+[alias]
+    br = branch
+    ci = commit
+    co = checkout
+    st = status --short
+    files = "!f() { git diff --name-status $1^ $1; }; f" # git files <SHA> , list modify files
+    info = cat-file commit HEAD
+    lo   = log --oneline
+    glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    gl   = log --decorate --graph --pretty=oneline
+    lg   = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\n' --abbrev-commit
+    gitk = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
+    glist= log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    d = difftool
+[merge]
+    tool = vimdiff
+[diff]
+    tool = vimdiff
+[core]
+    preloadindex = yes
+    # 換行字元誤認為是變更
+    #autocrlf = true
+    #safecrlf = true
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    editor = vim
+    autocrlf = false
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[branch]
+    autosetupmerge = true
+[apply]
+    whitespace = nowarn
+[push]
+    #提交本地所有分支至远程仓库
+    #default = matching
+    #仅提交当前分支至远程仓库
+    default = simple
+[help]
+    autocorrect = 1
+[grep]
+    fullname = true
+[difftool]
+    prompt = false
