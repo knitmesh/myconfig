@@ -65,11 +65,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -90,5 +90,45 @@ source $ZSH/oh-my-zsh.sh
 eval `dircolors ~/.dircolors`
 export TERM=xterm-256color 
 
+
+
+#漂亮又实用的命令高亮界面
+setopt extended_glob
+TOKENS_FOLLOWED_BY_COMMANDS=('|' '||' ';' '&' '&&' 'sudo' 'do' 'time' 'strace')
+
+recolor-cmd() {
+region_highlight=()
+colorize=true
+start_pos=0
+for arg in ${(z)BUFFER}; do
+    ((start_pos+=${#BUFFER[$start_pos+1,-1]}-${#${BUFFER[$start_pos+1,-1]## #}}))
+    ((end_pos=$start_pos+${#arg}))
+    if $colorize; then
+        colorize=false
+        res=$(LC_ALL=C builtin type $arg 2>/dev/null)
+        case $res in
+            *'reserved word'*)   style="fg=magenta,bold";;
+            *'alias for'*)       style="fg=cyan,bold";;
+            *'shell builtin'*)   style="fg=yellow,bold";;
+            *'shell function'*)  style='fg=green,bold';;
+            *"$arg is"*)
+                [[ $arg = 'sudo' ]] && style="fg=red,bold" || style="fg=blue,bold";;
+            *)                   style='none,bold';;
+        esac
+        region_highlight+=("$start_pos $end_pos $style")
+    fi
+    [[ ${${TOKENS_FOLLOWED_BY_COMMANDS[(r)${arg//|/\|}]}:+yes} = 'yes' ]] && colorize=true
+    start_pos=$end_pos
+done
+}
+
+check-cmd-self-insert() { zle .self-insert && recolor-cmd }
+check-cmd-backward-delete-char() { zle .backward-delete-char && recolor-cmd }
+zle -N self-insert check-cmd-self-insert
+zle -N backward-delete-char check-cmd-backward-delete-char
+
 # load aliases
 test -f ~/.bash_aliases && source ~/.bash_aliases
+
+
+
