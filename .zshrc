@@ -53,7 +53,8 @@ DEFAULT_USER='jing'
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow colored-man-pages z history history-substring-search github git-hubflow docker docker-compose )
+
+plugins=(git git-flow git-flow-completion colored-man-pages z last-working-dir history history-substring-search github git-hubflow docker docker-compose )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -132,3 +133,15 @@ test -f ~/.bash_aliases && source ~/.bash_aliases
 
 
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+eval $(thefuck --alias)
+
+
+# added by travis gem
+[ -f /home/jing/.travis/travis.sh ] && source /home/jing/.travis/travis.sh
