@@ -124,6 +124,5 @@ if [ -x /usr/bin/mint-fortune ]; then
      /usr/bin/mint-fortune
 fi
 
-
-PS1="\[\033[01;32m\]\u@\W\$\[\033[00m\] "
-export PS1
+# added by travis gem
+[ -f /home/jing/.travis/travis.sh ] && source /home/jing/.travis/travis.sh
