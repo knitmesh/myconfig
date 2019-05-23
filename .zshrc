@@ -145,3 +145,10 @@ eval $(thefuck --alias)
 
 # added by travis gem
 [ -f /home/jing/.travis/travis.sh ] && source /home/jing/.travis/travis.sh
+
+LANG="en_US.UTF-8"
+LANGUAGE="en_US:en"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/jing/.sdkman"
+[[ -s "/home/jing/.sdkman/bin/sdkman-init.sh" ]] && source "/home/jing/.sdkman/bin/sdkman-init.sh"
