@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/jing/.oh-my-zsh
+export ZSH=/home/jing/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -54,7 +54,7 @@ DEFAULT_USER='jing'
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git git-flow git-flow-completion colored-man-pages z last-working-dir history history-substring-search github git-hubflow docker docker-compose )
+plugins=(git git-flow colored-man-pages z last-working-dir history history-substring-search github git-hubflow docker docker-compose )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,8 +90,6 @@ fi
 # set /opt/dircolors-solarized/dircolors.256dark
 eval `dircolors ~/.dircolors`
 export TERM=xterm-256color 
-
-
 
 #漂亮又实用的命令高亮界面
 setopt extended_glob
@@ -131,8 +129,6 @@ zle -N backward-delete-char check-cmd-backward-delete-char
 # load aliases
 test -f ~/.bash_aliases && source ~/.bash_aliases
 
-
-
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -141,7 +137,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 eval $(thefuck --alias)
-
 
 # added by travis gem
 [ -f /home/jing/.travis/travis.sh ] && source /home/jing/.travis/travis.sh
